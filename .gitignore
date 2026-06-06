@@ -1,0 +1,137 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+env/
+venv/
+.venv/
+ENV/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# .NET
+bin/
+obj/
+*.csproj.user
+*.vcxproj.user
+*.vcxproj.filters
+*.vcxproj.User
+*.vcproj
+*.sln.docstates
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.User
+*.usercache
+*.user.dat
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.svd
+*.vssscc
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables (keep example files)
+.env
+!*.env.example
+
+# Logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Instrumentation libs
+*.lib
+*.a
+
+# Compiled binary files (examples)
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Generated files
+Generated/
+GeneratedTemp/
+
+# Uploaded files (for development)
+uploads/
+temp/
+temp/*
+
+# Swagger/OpenAPI generated files
+swagger/
+openapi/
+
+# Test coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis
+.pytest.cache/
+
+# Docs build (if we generate docs)
+docs/_build/

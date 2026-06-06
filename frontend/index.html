@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Document Q&A</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .upload-section, .chat-section {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        #fileInput, #questionInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #uploadBtn, #askBtn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        #uploadBtn:hover, #askBtn:hover {
+            background-color: #0056b3;
+        }
+        #answerArea {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            min-height: 100px;
+        }
+        .loading {
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Document Q&A System</h1>
+    <div class="container">
+        <div class="upload-section">
+            <h2>Upload Document</h2>
+            <input type="file" id="fileInput" accept=".pdf,.docx,.txt">
+            <button id="uploadBtn">Upload</button>
+            <p id="uploadStatus"></p>
+        </div>
+
+        <div class="chat-section">
+            <h2>Ask Questions</h2>
+            <input type="text" id="questionInput" placeholder="Type your question here...">
+            <button id="askBtn">Ask</button>
+            <div id="answerArea"></div>
+        </div>
+    </div>
+
+    <script>
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const askBtn = document.getElementById('askBtn');
+        const questionInput = document.getElementById('questionInput');
+        const answerArea = document.getElementById('answerArea');
+
+        uploadBtn.addEventListener('click', async () => {
+            const file = fileInput.files[0];
+            if (!file) {
+                uploadStatus.textContent = 'Please select a file to upload.';
+                uploadStatus.style.color = 'red';
+                return;
+            }
+
+            uploadStatus.textContent = 'Uploading...';
+            uploadStatus.style.color = 'blue';
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    uploadStatus.textContent = `Upload successful: ${result.message}`;
+                    uploadStatus.style.color = 'green';
+                } else {
+                    uploadStatus.textContent = 'Upload failed.';
+                    uploadStatus.style.color = 'red';
+                }
+            } catch (error) {
+                uploadStatus.textContent = 'Error uploading file.';
+                uploadStatus.style.color = 'red';
+                console.error(error);
+            }
+        });
+
+        askBtn.addEventListener('click', async () => {
+            const question = questionInput.value.trim();
+            if (!question) {
+                answerArea.textContent = 'Please enter a question.';
+                answerArea.style.color = 'red';
+                return;
+            }
+
+            answerArea.textContent = 'Thinking...';
+            answerArea.style.color = 'blue';
+
+            try {
+                const response = await fetch('/api/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    answerArea.textContent = result.answer || 'No answer received.';
+                    answerArea.style.color = 'black';
+                } else {
+                    answerArea.textContent = 'Failed to get answer.';
+                    answerArea.style.color = 'red';
+                }
+            } catch (error) {
+                answerArea.textContent = 'Error asking question.';
+                answerArea.style.color = 'red';
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
