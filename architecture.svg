@@ -1,0 +1,41 @@
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="400" rx="20" fill="#f8fafc"/>
+  
+  <!-- Frontend -->
+  <rect x="50" y="150" width="150" height="100" rx="10" fill="#2563eb" fill-opacity="0.1" stroke="#2563eb" stroke-width="2"/>
+  <text x="125" y="200" font-family="Arial" font-size="16" fill="#1e293b" text-anchor="middle" font-weight="bold">Frontend</text>
+  <text x="125" y="220" font-family="Arial" font-size="12" fill="#64748b" text-anchor="middle">HTML/JS (Marked.js)</text>
+
+  <!-- .NET API -->
+  <rect x="300" y="150" width="150" height="100" rx="10" fill="#2563eb" fill-opacity="0.1" stroke="#2563eb" stroke-width="2"/>
+  <text x="375" y="200" font-family="Arial" font-size="16" fill="#1e293b" text-anchor="middle" font-weight="bold">.NET API</text>
+  <text x="375" y="220" font-family="Arial" font-size="12" fill="#64748b" text-anchor="middle">ASP.NET Core 8</text>
+
+  <!-- Python Service -->
+  <rect x="550" y="50" width="200" height="300" rx="10" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="2"/>
+  <text x="650" y="80" font-family="Arial" font-size="16" fill="#1e293b" text-anchor="middle" font-weight="bold">AI Service (Python)</text>
+  
+  <!-- Internal components of Python Service -->
+  <rect x="570" y="100" width="160" height="60" rx="5" fill="white" stroke="#10b981" stroke-dasharray="4 4"/>
+  <text x="650" y="130" font-family="Arial" font-size="12" fill="#065f46" text-anchor="middle">Local Embeddings</text>
+  <text x="650" y="145" font-family="Arial" font-size="10" fill="#065f46" text-anchor="middle">(all-MiniLM-L6-v2)</text>
+
+  <rect x="570" y="180" width="160" height="60" rx="5" fill="white" stroke="#10b981" stroke-dasharray="4 4"/>
+  <text x="650" y="210" font-family="Arial" font-size="12" fill="#065f46" text-anchor="middle">FAISS Vector Store</text>
+
+  <rect x="570" y="260" width="160" height="60" rx="5" fill="white" stroke="#10b981" stroke-dasharray="4 4"/>
+  <text x="650" y="290" font-family="Arial" font-size="12" fill="#065f46" text-anchor="middle">OpenRouter API</text>
+  <text x="650" y="305" font-family="Arial" font-size="10" fill="#065f46" text-anchor="middle">(gpt-oss-120b:free)</text>
+
+  <!-- Arrows -->
+  <path d="M200 200 H300" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M450 200 H550" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrowheads -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+    </marker>
+  </defs>
+</svg>

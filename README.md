@@ -2,7 +2,7 @@
 
 A full-stack, Retrieval-Augmented Generation (RAG) system that allows you to upload large documents (PDF, DOCX, TXT) and ask questions about their content. This project is optimized for performance and is **100% free to operate** by combining local AI models with free cloud LLMs.
 
-![Architecture](./docs/architecture.svg)
+![Architecture](architecture.svg)
 
 ## ✨ Key Features
 
