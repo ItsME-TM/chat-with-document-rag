@@ -1,93 +1,78 @@
-# AI Document Q&A System - Phase 1: Working Skeleton
+# AI Document Q&A Hub 🚀
 
-This is the Phase 1 implementation of the AI Document Q&A system. It provides a minimal end-to-end skeleton that demonstrates the architecture and basic communication between the frontend, .NET API, and Python AI service.
+A full-stack, Retrieval-Augmented Generation (RAG) system that allows you to upload large documents (PDF, DOCX, TXT) and ask questions about their content. This project is optimized for performance and is **100% free to operate** by combining local AI models with free cloud LLMs.
 
-## Project Structure
+![Architecture](./docs/architecture.svg)
 
-```
-cross-rag-hub/
-├── ai-service/          # Python FastAPI service (skeleton)
-│   ├── main.py
-│   └── requirements.txt
-├── dotnet-api/          # ASP.NET Core Web API (skeleton)
-│   ├── Program.cs
-│   ├── Controllers/
-│   │   └─ DocumentController.cs
-│   └── Services/
-│       └─ AiService.cs
-└── frontend/            # Simple HTML/JavaScript frontend
-    └── index.html
-```
+## ✨ Key Features
 
-## Prerequisites
+-   **Zero Cost**: Uses local embeddings (`all-MiniLM-L6-v2`) and OpenRouter's free models (`gpt-oss-120b:free`).
+-   **Large Document Support**: Successfully tested with 300+ page PDFs.
+-   **Smart Context**: Automatically finds the most relevant parts of your document to answer questions.
+-   **Modern Dashboard**: Clean, responsive UI with real-time markdown rendering.
+-   **Cross-Platform Stack**: Combines the power of .NET 8, Python (FastAPI), and Vanilla JS.
 
-- Python 3.8+
-- .NET 8.0 SDK
-- A modern web browser
+## 🏗️ Architecture
 
-## Setup and Running
+The system consists of three main components:
 
-### 1. Python AI Service
+1.  **Frontend (Port 3000)**: A modern HTML5/JavaScript dashboard using `Marked.js` for markdown rendering.
+2.  **Gateway API (Port 5000)**: An ASP.NET Core 8 Web API that manages communication and security.
+3.  **AI Engine (Port 8000)**: A Python FastAPI service that handles:
+    *   **Document Loading**: Parsing PDF, Word, and Text files.
+    *   **Local Embedding**: Turning text into searchable vectors locally (Privacy-first & Free).
+    *   **Vector Search**: Using FAISS to find context instantly.
+    *   **LLM Orchestration**: Communicating with OpenRouter for high-quality answers.
 
-Navigate to the `ai-service` directory and install dependencies:
+## 🛠️ Setup Instructions
 
-```bash
-cd ai-service
-pip install -r requirements.txt
-```
+### 1. Prerequisites
+-   [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+-   [Python 3.12+](https://www.python.org/downloads/)
+-   An [OpenRouter API Key](https://openrouter.ai/keys) (Free)
 
-Run the service:
-
-```bash
-uvicorn main:app --reload
+### 2. Configure Environment
+Create a `.env` file in the `ai-service` directory:
+```env
+OPENROUTER_API_KEY=your_free_key_here
 ```
 
-The service will be available at `http://localhost:8000`.
+### 3. Quick Start (Windows)
+Simply double-click the `launch.bat` file in the root directory. This will start all three services in separate windows.
 
-### 2. .NET API Service
+**OR Start Manually:**
 
-Navigate to the `dotnet-api` directory and run:
+-   **Python AI Service**:
+    ```bash
+    cd ai-service
+    pip install -r requirements.txt
+    uvicorn main:app --reload --port 8000
+    ```
+-   **.NET API**:
+    ```bash
+    cd dotnet-api
+    dotnet run
+    ```
+-   **Frontend**:
+    ```bash
+    cd frontend
+    python -m http.server 3000
+    ```
 
-```bash
-cd dotnet-api
-dotnet run
-```
+## 🚀 Usage
 
-The service will be available at `http://localhost:5000` (or another port if 5000 is in use).
+1.  Open your browser to `http://localhost:3000`.
+2.  Select a document (e.g., a technical manual or a 300-page book).
+3.  Click **Upload Document** and wait for the "Ready" status.
+4.  Type your question in the chat box and press **Enter**.
+5.  View the AI's response, complete with formatted lists and headers!
 
-### 3. Frontend
+## 🔧 Technologies Used
 
-Open `frontend/index.html` in a web browser. The frontend is configured to call the .NET API at `/api/upload` and `/api/ask` (relative to the frontend's origin).
+-   **Backend**: Python, FastAPI, LangChain, FAISS, HuggingFace Transformers.
+-   **API Gateway**: C#, ASP.NET Core 8, HttpClient.
+-   **Frontend**: HTML5, CSS3, Modern JavaScript, Marked.js.
+-   **Models**: `all-MiniLM-L6-v2` (Local), `gpt-oss-120b:free` (OpenRouter).
 
-**Note**: For the frontend to work correctly, you need to serve it from a web server (to avoid CORS issues). You can use a simple Python HTTP server:
-
-```bash
-cd frontend
-python -m http.server 3000
-```
-
-Then open your browser to `http://localhost:3000`.
-
-## Expected Behavior
-
-- **Upload**: Select a file (any type) and click "Upload". You should see a success message: "Upload successful: File received".
-- **Ask**: Type a question in the input box and click "Ask". You should see the answer: "This is a skeleton response.".
-
-## Next Steps (Phase 2)
-
-In Phase 2, we will implement the full RAG pipeline in the Python service:
-- Process uploaded documents (PDF, DOCX, TXT) using LangChain loaders.
-- Split text into chunks and generate embeddings using OpenAI's `text-embedding-3-small`.
-- Store vectors in FAISS for fast similarity search.
-- Use the OpenRouter free model `gpy-oss-120b:free` to generate answers based on retrieved context.
-- The .NET API will forward requests to the Python service and return the actual results.
-
-## Troubleshooting
-
-- **Frontend cannot connect to .NET API**: Ensure the .NET API is running and that the frontend is served from a server (not opened directly as a file) to avoid CORS issues.
-- **Port conflicts**: If the default ports (8000 for Python, 5000 for .NET) are in use, you can change them in the respective service configurations.
-- **Dependencies**: Make sure you have installed all required dependencies for each service.
-
-## License
-
-This project is for educational and demonstration purposes.
+---
+*Created for efficient, privacy-conscious document intelligence.*

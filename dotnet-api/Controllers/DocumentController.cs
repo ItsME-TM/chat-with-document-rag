@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using dotnet_api.Services;
 
 namespace dotnet_api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api")]
     public class DocumentController : ControllerBase
     {
         private readonly IAiService _aiService;
@@ -18,7 +19,7 @@ namespace dotnet_api.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> Upload(IFormFile file)
         {
-            // In Phase 1, we return a fixed response. In Phase 2, we'll call the Python service.
+            // Forward request to Python service
             var result = await _aiService.UploadFileAsync(file);
             return Ok(result);
         }
@@ -26,7 +27,7 @@ namespace dotnet_api.Controllers
         [HttpPost("ask")]
         public async Task<IActionResult> Ask([FromBody] QuestionRequest request)
         {
-            // In Phase 1, we return a fixed response. In Phase 2, we'll call the Python service.
+            // Forward request to Python service
             var result = await _aiService.AskQuestionAsync(request.Question);
             return Ok(result);
         }
@@ -34,17 +35,17 @@ namespace dotnet_api.Controllers
 
     public class QuestionRequest
     {
-        public string Question { get; set; }
+        public string Question { get; set; } = string.Empty;
     }
 
     public class UploadResponse
     {
-        public string Status { get; set; }
-        public string Message { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
     }
 
     public class AskResponse
     {
-        public string Answer { get; set; }
+        public string Answer { get; set; } = string.Empty;
     }
 }
